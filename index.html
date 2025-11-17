@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة الصيدلية</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- ملفات CSS الخاصة بالمشروع -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <!-- صفحة تسجيل الدخول -->
+    <div id="loginPage" class="login-container">
+        <div class="login-left">
+            <div class="login-logo">
+                <h4>نظام إدارة الصيدلية</h4>
+                <p>Pharmacy Management System</p>
+            </div>
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <div>
+                        <h4>إدارة الأدوية</h4>
+                        <p>إدارة كاملة لمخزون الأدوية وتتبع الصلاحية</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div>
+                        <h4>نقاط البيع</h4>
+                        <p>نظام بيع سريع وفواتير إلكترونية</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div>
+                        <h4>تقارير متقدمة</h4>
+                        <p>تقارير شاملة عن المبيعات والأرباح</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="login-right">
+            <div class="login-form">
+                <h2>تسجيل الدخول</h2>
+                <form id="loginForm">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="username" placeholder="اسم المستخدم" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="password" placeholder="كلمة المرور" required>
+                    </div>
+                    <div class="mb-3 form-check d-flex">
+                        <input type="checkbox" class="form-check-input" style="margin-top: 6px;" id="rememberMe">
+                        <label class="form-check-label" style="margin-right: 30px;" for="rememberMe">تذكرني</label>
+                    </div>
+                    <button type="submit" class="btn btn-login">تسجيل الدخول</button>
+                </form>
+                <div class="login-footer">
+                    <p>نسيت كلمة المرور؟ <a href="#" id="forgotPassword">استعادة كلمة المرور</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- النظام الرئيسي -->
+    <div id="mainSystem" class="main-system">
+        <!-- الهيكل الرئيسي -->
+        <div class="container-fluid">
+            <!-- الشريط الجانبي -->
+            <nav class="sidebar col-md-3 col-lg-2 d-md-block p-3">
+                <div class="position-sticky">
+                    <div class="text-center mb-4">
+                        <h3 class="fw-bold">نظام إدارة الصيدلية</h3>
+                        <p class="text-light small">Pharmacy Management System</p>
+                    </div>
+
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#" onclick="showPage('dashboard')">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>لوحة التحكم</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showPage('medicines')">
+                                <i class="fas fa-pills"></i>
+                                <span>إدارة الأدوية</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showPage('sales')">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>المبيعات</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showPage('inventory')">
+                                <i class="fas fa-boxes"></i>
+                                <span>المخزون</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showPage('alerts')">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>التنبيهات</span>
+                                <span class="badge bg-danger alert-badge" style="margin-top: 6px;"
+                                    id="alertsCount">3</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showPage('reports')">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>التقارير</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showPage('suppliers')">
+                                <i class="fas fa-truck-loading"></i>
+                                <span>الموردين</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showPage('employees')">
+                                <i class="fas fa-users"></i>
+                                <span>إدارة الموظفين</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showPage('delivery')">
+                                <i class="fas fa-truck"></i>
+                                <span>خدمة التوصيل</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showPage('settings')">
+                                <i class="fas fa-cog"></i>
+                                <span>الإعدادات</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- المحتوى الرئيسي -->
+            <main class="main-content">
+                <!-- شريط العنوان -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="fw-bold text-primary" id="pageTitle">لوحة التحكم</h2>
+                    <div class="d-flex align-items-center">
+                        <div class="dropdown me-3">
+                            <button class="btn btn-outline-primary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" id="notificationDropdown">
+                                <i class="fas fa-bell"></i>
+                                <span class="badge bg-danger" id="notificationCount">5</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown"
+                                style="width: 350px; max-height: 400px; overflow-y: auto;">
+                                <li>
+                                    <h6 class="dropdown-header">الإشعارات الحديثة</h6>
+                                </li>
+                                <div id="notificationList">
+                                    <!-- سيتم تعبئته بالإشعارات -->
+                                </div>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item text-center" href="#" onclick="showPage('alerts')">عرض جميع
+                                        الإشعارات</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" id="userDropdown">
+                                <i class="fas fa-user me-2"></i> <span id="userDisplayName">د. أحمد محمد</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end text-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="#" onclick="showPage('profile')"><i
+                                            class="fas fa-user-circle me-2"></i> الملف الشخصي</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="showPage('settings')"><i
+                                            class="fas fa-cog me-2"></i> الإعدادات</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#" onclick="logout()"><i
+                                            class="fas fa-sign-out-alt me-2"></i> تسجيل الخروج</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- صفحة لوحة التحكم -->
+                <div id="dashboard" class="page active">
+                    <!-- بطاقات الإحصائيات -->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="stat-card">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="text-muted">إجمالي المبيعات</h5>
+                                        <h3 class="fw-bold" id="totalSales">8,742 <span
+                                                class="fs-6 text-success">ج.م</span></h3>
+                                        <p class="text-success mb-0"><i class="fas fa-arrow-up"></i> 12% عن الشهر الماضي
+                                        </p>
+                                    </div>
+                                    <div class="icon bg-primary text-white">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="text-muted">الأدوية المتاحة</h5>
+                                        <h3 class="fw-bold" id="totalMedicines">342 <span class="fs-6">صنف</span></h3>
+                                        <p class="text-danger mb-0"><i class="fas fa-exclamation-circle"></i> <span
+                                                id="lowStockCount">5</span> أدوية منخفضة</p>
+                                    </div>
+                                    <div class="icon bg-success text-white">
+                                        <i class="fas fa-pills"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="text-muted">الطلبات اليوم</h5>
+                                        <h3 class="fw-bold" id="todayOrders">47 <span class="fs-6">طلب</span></h3>
+                                        <p class="text-success mb-0"><i class="fas fa-check-circle"></i> 42 مكتمل</p>
+                                    </div>
+                                    <div class="icon bg-warning text-white">
+                                        <i class="fas fa-clipboard-list"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="text-muted">التوصيلات</h5>
+                                        <h3 class="fw-bold" id="todayDeliveries">15 <span class="fs-6">طلب</span></h3>
+                                        <p class="text-info mb-0"><i class="fas fa-shipping-fast"></i> 10 قيد التوصيل
+                                        </p>
+                                    </div>
+                                    <div class="icon bg-info text-white">
+                                        <i class="fas fa-truck"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- المحتوى الرئيسي -->
+                    <div class="row mt-4">
+                        <!-- الأدوية المنخفضة والمقتربة من الانتهاء -->
+                        <div class="col-md-6">
+                            <div class="card medicine-card">
+                                <div
+                                    class="card-header bg-warning text-dark d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i> تنبيهات المخزون
+                                    </h5>
+                                    <a href="#" class="btn btn-sm btn-outline-dark" onclick="showPage('alerts')">عرض
+                                        الكل</a>
+                                </div>
+                                <div class="card-body" id="alertsList">
+                                    <!-- سيتم تعبئته بالبيانات -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- المبيعات اليومية -->
+                        <div class="col-md-6">
+                            <div class="card medicine-card">
+                                <div
+                                    class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0"><i class="fas fa-chart-line me-2"></i> المبيعات اليومية</h5>
+                                    <a href="#" class="btn btn-sm btn-light" onclick="showPage('reports')">عرض
+                                        التقرير</a>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="salesChart" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- قائمة الأدوية الحديثة -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card medicine-card">
+                                <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0 text-dark"><i class="fas fa-list me-2"></i> أحدث الأدوية المضافة
+                                    </h5>
+                                    <div>
+                                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#addMedicineModal" id="addMedicineBtn"><i
+                                                class="fas fa-plus me-1"></i> إضافة دواء</button>
+                                        <button class="btn btn-outline-primary btn-sm" onclick="loadMedicines()"><i
+                                                class="fas fa-sync me-1"></i> تحديث</button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>اسم الدواء</th>
+                                                    <th>المادة الفعالة</th>
+                                                    <th>السعر</th>
+                                                    <th>المخزون</th>
+                                                    <th>الحالة</th>
+                                                    <th>الإجراءات</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="recentMedicinesTable">
+                                                <!-- سيتم تعبئته بالبيانات -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- صفحة الملف الشخصي -->
+                <div id="profile" class="page">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-user-circle me-2"></i> الملف الشخصي</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 text-center">
+                                    <div class="mb-4">
+                                        <img src="https://via.placeholder.com/150" class="rounded-circle mb-3"
+                                            alt="صورة المستخدم" width="150" height="150">
+                                        <h4 id="profileName">د. أحمد محمد</h4>
+                                        <p class="text-muted" id="profileRole">مدير الصيدلية</p>
+                                        <button class="btn btn-outline-primary btn-sm"
+                                            onclick="changeProfilePicture()">تغيير الصورة</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <form id="profileForm">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label for="profileFirstName" class="form-label">الاسم الأول</label>
+                                                <input type="text" class="form-control" id="profileFirstName"
+                                                    value="محمد">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="profileLastName" class="form-label">الاسم الأخير</label>
+                                                <input type="text" class="form-control" id="profileLastName"
+                                                    value="أحمد">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="profileEmail" class="form-label">البريد الإلكتروني</label>
+                                            <input type="email" class="form-control" id="profileEmail"
+                                                value="mohammed@pharmacy.com">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="profilePhone" class="form-label">رقم الهاتف</label>
+                                            <input type="tel" class="form-control" id="profilePhone"
+                                                value="+201234567890">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="profileAddress" class="form-label">العنوان</label>
+                                            <textarea class="form-control" id="profileAddress"
+                                                rows="3">المحلة - مصر</textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="profileBio" class="form-label">نبذة عني</label>
+                                            <textarea class="form-control" id="profileBio"
+                                                rows="3">صيدلي محترف بخبرة 10 سنوات في إدارة الصيدليات</textarea>
+                                        </div>
+                                        <button type="button" class="btn btn-primary" onclick="updateProfile()">حفظ
+                                            التغييرات</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- صفحة إدارة الأدوية -->
+                <div id="medicines" class="page">
+                    <div class="card">
+                        <div
+                            class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0"><i class="fas fa-pills me-2"></i> إدارة الأدوية</h5>
+                            <button class="btn btn-light btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#addMedicineModal" id="addMedicineBtn2">
+                                <i class="fas fa-plus me-1"></i> إضافة دواء جديد
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <div class="input-group search-input-group">
+                                        <input type="text" class="form-control" style="height: 37px; border-radius: 0;"
+                                            placeholder="ابحث عن دواء..." id="medicineSearch">
+                                        <button class="btn btn-outline-primary" style="transform: rotate(180deg);"
+                                            type="button" onclick="searchMedicines()">
+                                            <i class="fas fa-search" style="transform: rotate(180deg);"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-select" id="categoryFilter" onchange="filterMedicines()">
+                                        <option value="">جميع الفئات</option>
+                                        <option value="مسكنات">مسكنات</option>
+                                        <option value="مضادات حيوية">مضادات حيوية</option>
+                                        <option value="فيتامينات">فيتامينات</option>
+                                        <option value="أدوية مزمنة">أدوية مزمنة</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select class="form-select" id="statusFilter" onchange="filterMedicines()">
+                                        <option value="">جميع الحالات</option>
+                                        <option value="منخفض">منخفض المخزون</option>
+                                        <option value="ينتهي قريباً">ينتهي قريباً</option>
+                                        <option value="جيد">مخزون جيد</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>اسم الدواء</th>
+                                            <th>الباركود</th>
+                                            <th>المادة الفعالة</th>
+                                            <th>الفئة</th>
+                                            <th>السعر</th>
+                                            <th>المخزون</th>
+                                            <th>الحد الأدنى</th>
+                                            <th>انتهاء الصلاحية</th>
+                                            <th>الحالة</th>
+                                            <th>الإجراءات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="medicinesTable">
+                                        <!-- سيتم تعبئته بالبيانات -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- صفحة المبيعات -->
+                <div id="sales" class="page">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div
+                                    class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0"><i class="fas fa-shopping-cart me-2"></i> نقاط البيع</h5>
+                                    <button class="btn btn-light btn-sm" onclick="newSale()">
+                                        <i class="fas fa-receipt me-1"></i> فاتورة جديدة
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="input-group search-input-group">
+                                                <input type="text" class="form-control"
+                                                    style="height: 37px; border-radius: 0;"
+                                                    placeholder="ابحث عن دواء بالاسم أو الباركود" id="saleSearch"
+                                                    onkeyup="searchSaleMedicines()">
+                                                <button class="btn btn-outline-primary"
+                                                    style="transform: rotate(180deg);" type="button">
+                                                    <i class="fas fa-search" style="transform: rotate(180deg);"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" style="height: 37px;"
+                                                placeholder="اسم العميل" id="customerName">
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>اسم الدواء</th>
+                                                    <th>السعر</th>
+                                                    <th>الكمية</th>
+                                                    <th>المجموع</th>
+                                                    <th>الإجراءات</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="saleItemsTable">
+                                                <!-- سيتم تعبئته بالبيانات -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label for="paymentMethod" class="form-label">طريقة الدفع</label>
+                                                <select class="form-select" id="paymentMethod">
+                                                    <option value="نقدي">نقدي</option>
+                                                    <option value="بطاقة">بطاقة ائتمان</option>
+                                                    <option value="محفظة">محفظة إلكترونية</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 text-center">
+                                            <h5>المجموع: <span id="saleTotal">0.00</span> ج.م</h5>
+                                            <button class="btn btn-success btn-lg" onclick="completeSale()">
+                                                <i class="fas fa-check me-2"></i> إتمام البيع
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0"><i class="fas fa-list me-2"></i> قائمة الأدوية السريعة</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="quickMedicinesList" class="d-flex flex-wrap gap-2">
+                                        <!-- سيتم تعبئته بالبيانات -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mt-3">
+                                <div class="card-header bg-info text-white">
+                                    <h5 class="mb-0"><i class="fas fa-history me-2"></i> آخر المبيعات</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="recentSalesList">
+                                        <!-- سيتم تعبئته بالبيانات -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- صفحة المخزون -->
+                <div id="inventory" class="page">
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0"><i class="fas fa-boxes me-2"></i> إدارة المخزون والجرد</h5>
+                            <div>
+                                <button class="btn btn-sm btn-outline-dark me-2" data-bs-toggle="modal"
+                                    data-bs-target="#damageModal" id="damageBtn">
+                                    <i class="fas fa-times-circle me-1"></i> تسجيل تلفيات
+                                </button>
+                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#inventoryModal" id="inventoryBtn">
+                                    <i class="fas fa-clipboard-list me-1"></i> جرد المخزون
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-md-3">
+                                    <div class="stat-card">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="text-muted">إجمالي الأصناف</h5>
+                                                <h3 class="fw-bold" id="totalItems">342</h3>
+                                                <p class="text-success mb-0"><i class="fas fa-box me-1"></i> جميع
+                                                    الأصناف</p>
+                                            </div>
+                                            <div class="icon bg-primary text-white">
+                                                <i class="fas fa-boxes"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="stat-card inventory-alert" style="border-right-color: #ff6b35;">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="text-muted">منخفضة المخزون</h5>
+                                                <h3 class="fw-bold text-danger" id="lowStockItems">5</h3>
+                                                <p class="text-danger mb-0"><i
+                                                        class="fas fa-exclamation-circle me-1"></i> تحت الحد الأدنى</p>
+                                            </div>
+                                            <div class="icon bg-danger text-white">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="stat-card inventory-alert" style="border-right-color: #ffc107;">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="text-muted">تنتهي قريباً</h5>
+                                                <h3 class="fw-bold text-warning" id="expiringItems">2</h3>
+                                                <p class="text-warning mb-0"><i class="fas fa-clock me-1"></i> خلال 30
+                                                    يوم</p>
+                                            </div>
+                                            <div class="icon bg-warning text-white">
+                                                <i class="fas fa-skull-crossbones"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="stat-card">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="text-muted">التلفيات الشهر</h5>
+                                                <h3 class="fw-bold" id="monthlyDamages">8</h3>
+                                                <p class="text-info mb-0"><i class="fas fa-times-circle me-1"></i>
+                                                    قيمتها: 450 ج.م</p>
+                                            </div>
+                                            <div class="icon bg-info text-white">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header bg-danger text-white">
+                                            <h6 class="mb-0"><i class="fas fa-list me-2"></i> أحدث التلفيات المسجلة</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div id="recentDamagesList">
+                                                <!-- سيتم تعبئته بالبيانات -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card">
+                                        <div class="card-header bg-warning text-dark">
+                                            <h6 class="mb-0"><i class="fas fa-chart-pie me-2"></i> توزيع المخزون</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="inventoryChart" height="200"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- صفحة التنبيهات -->
+                <div id="alerts" class="page">
+                    <div class="card">
+                        <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i> التنبيهات والإشعارات</h5>
+                            <div>
+                                <button class="btn btn-sm btn-light me-2" onclick="markAllAlertsAsRead()"
+                                    id="markAllReadBtn">
+                                    <i class="fas fa-check-double me-1"></i> تعليم الكل كمقروء
+                                </button>
+                                <button class="btn btn-sm btn-outline-light" onclick="refreshAlerts()">
+                                    <i class="fas fa-sync me-1"></i> تحديث
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <select class="form-select" id="alertTypeFilter" onchange="filterAlerts()">
+                                        <option value="">جميع أنواع التنبيهات</option>
+                                        <option value="low_stock">منخفض المخزون</option>
+                                        <option value="expiration">انتهاء الصلاحية</option>
+                                        <option value="damage">تلفيات</option>
+                                        <option value="system">نظام</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-select" id="alertPriorityFilter" onchange="filterAlerts()">
+                                        <option value="">جميع الأولويات</option>
+                                        <option value="high">عالي</option>
+                                        <option value="medium">متوسط</option>
+                                        <option value="low">منخفض</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-select" id="alertStatusFilter" onchange="filterAlerts()">
+                                        <option value="">جميع الحالات</option>
+                                        <option value="unresolved">غير محلولة</option>
+                                        <option value="resolved">محلولة</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="alertsContainer">
+                                <!-- سيتم تعبئته بالتنبيهات -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- صفحة التقارير -->
+                <div id="reports" class="page">
+                    <div class="card">
+                        <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i> التقارير والإحصائيات</h5>
+                            <div>
+                                <button class="btn btn-sm btn-light me-2" onclick="generateReport('daily')"
+                                    id="printReportBtn">
+                                    <i class="fas fa-print me-1"></i> طباعة التقرير
+                                </button>
+                                <button class="btn btn-sm btn-outline-light" onclick="exportReport()"
+                                    id="exportReportBtn">
+                                    <i class="fas fa-download me-1"></i> تصدير Excel
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-md-3">
+                                    <label for="reportType" class="form-label">نوع التقرير</label>
+                                    <select class="form-select" id="reportType" onchange="changeReportType()">
+                                        <option value="sales">تقرير المبيعات</option>
+                                        <option value="inventory">تقرير المخزون</option>
+                                        <option value="profits">تقرير الأرباح</option>
+                                        <option value="expired">تقرير المنتهي الصلاحية</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="dateFrom" class="form-label">من تاريخ</label>
+                                    <input type="date" class="form-control" id="dateFrom">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="dateTo" class="form-label">إلى تاريخ</label>
+                                    <input type="date" class="form-control" id="dateTo">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">&nbsp;</label>
+                                    <button class="btn btn-primary w-100" onclick="generateReport()">
+                                        <i class="fas fa-chart-line me-1"></i> عرض التقرير
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="reportContent">
+                                <!-- سيتم تعبئته بمحتوى التقرير -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- صفحة الموردين -->
+                <div id="suppliers" class="page">
+                    <div class="card">
+                        <div
+                            class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0"><i class="fas fa-truck-loading me-2"></i> إدارة الموردين</h5>
+                            <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#supplierModal"
+                                id="addSupplierBtn">
+                                <i class="fas fa-plus me-1"></i> إضافة مورد جديد
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-md-8">
+                                    <div class="input-group search-input-group">
+                                        <input type="text" class="form-control" placeholder="ابحث عن مورد..."
+                                            id="supplierSearch" onkeyup="searchSuppliers()">
+                                        <button class="btn btn-outline-primary" type="button">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-select" id="supplierRatingFilter" onchange="filterSuppliers()">
+                                        <option value="">جميع التقييمات</option>
+                                        <option value="5">5 نجوم</option>
+                                        <option value="4">4 نجوم فأكثر</option>
+                                        <option value="3">3 نجوم فأكثر</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row" id="suppliersList">
+                                <!-- سيتم تعبئته بقائمة الموردين -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- صفحة إدارة الموظفين -->
+                <div id="employees" class="page">
+                    <div class="card">
+                        <div
+                            class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0"><i class="fas fa-users me-2"></i> إدارة الموظفين والصلاحيات</h5>
+                            <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#employeeModal"
+                                id="addEmployeeBtn">
+                                <i class="fas fa-user-plus me-1"></i> إضافة موظف جديد
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>اسم الموظف</th>
+                                            <th>اسم المستخدم</th>
+                                            <th>الدور</th>
+                                            <th>الحالة</th>
+                                            <th>آخر دخول</th>
+                                            <th>الإجراءات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="employeesTable">
+                                        <!-- سيتم تعبئته بالبيانات -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- صفحة التوصيل -->
+                <div id="delivery" class="page">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-truck me-2"></i> خدمة التوصيل</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="stat-card">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="text-muted">طلبات التوصيل</h5>
+                                                <h3 class="fw-bold">15</h3>
+                                                <p class="text-info mb-0"><i class="fas fa-truck me-1"></i> 10 قيد
+                                                    التوصيل</p>
+                                            </div>
+                                            <div class="icon bg-info text-white">
+                                                <i class="fas fa-shipping-fast"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="stat-card">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="text-muted">تم التوصيل</h5>
+                                                <h3 class="fw-bold">125</h3>
+                                                <p class="text-success mb-0"><i class="fas fa-check-circle me-1"></i>
+                                                    هذا الشهر</p>
+                                            </div>
+                                            <div class="icon bg-success text-white">
+                                                <i class="fas fa-check"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="stat-card">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="text-muted">متوسط وقت التوصيل</h5>
+                                                <h3 class="fw-bold">45</h3>
+                                                <p class="text-primary mb-0"><i class="fas fa-clock me-1"></i> دقيقة</p>
+                                            </div>
+                                            <div class="icon bg-primary text-white">
+                                                <i class="fas fa-stopwatch"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <h5>طلبات التوصيل الحالية</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>رقم الطلب</th>
+                                                <th>اسم العميل</th>
+                                                <th>العنوان</th>
+                                                <th>حالة التوصيل</th>
+                                                <th>الإجراءات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>#D-001</td>
+                                                <td>أحمد محمد</td>
+                                                <td>شارع النصر - الحي الأول</td>
+                                                <td><span class="badge bg-warning">قيد التوصيل</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-success">تم التوصيل</button>
+                                                    <button class="btn btn-sm btn-info">تفاصيل</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#D-002</td>
+                                                <td>أحمد محمود</td>
+                                                <td>حي الأمل - شارع 10</td>
+                                                <td><span class="badge bg-primary">معلق</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary">بدء التوصيل</button>
+                                                    <button class="btn btn-sm btn-info">تفاصيل</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- صفحة الإعدادات -->
+                <div id="settings" class="page">
+                    <div class="card">
+                        <div class="card-header bg-secondary text-white">
+                            <h5 class="mb-0"><i class="fas fa-cog me-2"></i> الإعدادات</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>إعدادات النظام</h5>
+                                    <div class="mb-3">
+                                        <label class="form-label">اسم الصيدلية</label>
+                                        <input type="text" class="form-control" id="pharmacyName" value="صيدلية النخبة">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">العنوان</label>
+                                        <textarea class="form-control"
+                                            id="pharmacyAddress">شارع النخبة - المدينة الجديدة</textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">رقم الهاتف</label>
+                                        <input type="text" class="form-control" id="pharmacyPhone" value="01234567890">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">البريد الإلكتروني</label>
+                                        <input type="email" class="form-control" id="pharmacyEmail"
+                                            value="info@elite-pharmacy.com">
+                                    </div>
+                                    <button class="btn btn-primary" onclick="saveSystemSettings()">حفظ
+                                        الإعدادات</button>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>إعدادات الأمان</h5>
+                                    <div class="mb-3">
+                                        <label class="form-label">كلمة المرور الحالية</label>
+                                        <input type="password" class="form-control" id="currentPassword"
+                                            placeholder="كلمة المرور الحالية">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">كلمة المرور الجديدة</label>
+                                        <input type="password" class="form-control" id="newPassword"
+                                            placeholder="كلمة المرور الجديدة">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">تأكيد كلمة المرور الجديدة</label>
+                                        <input type="password" class="form-control" id="confirmPassword"
+                                            placeholder="تأكيد كلمة المرور الجديدة">
+                                    </div>
+                                    <button class="btn btn-primary" onclick="changePassword()">تغيير كلمة
+                                        المرور</button>
+
+                                    <hr class="my-4">
+
+                                    <h5>إعدادات الإشعارات</h5>
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" id="notifStock" checked>
+                                        <label class="form-check-label" for="notifStock">تنبيهات المخزون المنخفض</label>
+                                    </div>
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" id="notifExpiry" checked>
+                                        <label class="form-check-label" for="notifExpiry">تنبيهات انتهاء
+                                            الصلاحية</label>
+                                    </div>
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" id="notifSales">
+                                        <label class="form-check-label" for="notifSales">إشعارات المبيعات
+                                            اليومية</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- النماذج الإضافية -->
+    <!-- نموذج إضافة دواء جديد -->
+    <div class="modal fade" id="addMedicineModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fas fa-pills me-2"></i>إضافة دواء جديد</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="medicineForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="medicineName" class="form-label">اسم الدواء *</label>
+                                <input type="text" class="form-control" id="medicineName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="barcode" class="form-label">الباركود</label>
+                                <input type="text" class="form-control" id="barcode">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="activeIngredient" class="form-label">المادة الفعالة *</label>
+                                <input type="text" class="form-control" id="activeIngredient" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="category" class="form-label">الفئة</label>
+                                <select class="form-select" id="category">
+                                    <option value="مسكنات">مسكنات</option>
+                                    <option value="مضادات حيوية">مضادات حيوية</option>
+                                    <option value="فيتامينات">فيتامينات</option>
+                                    <option value="أدوية مزمنة">أدوية مزمنة</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="price" class="form-label">السعر (ج.م) *</label>
+                                <input type="number" class="form-control" id="price" step="0.01" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="stock" class="form-label">الكمية في المخزون *</label>
+                                <input type="number" class="form-control" id="stock" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="minStock" class="form-label">الحد الأدنى للمخزون</label>
+                                <input type="number" class="form-control" id="minStock" value="10">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="expiration" class="form-label">تاريخ انتهاء الصلاحية</label>
+                                <input type="date" class="form-control" id="expiration">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="supplier" class="form-label">المورد</label>
+                                <select class="form-select" id="supplier">
+                                    <option value="1">شركة الأدوية المصرية</option>
+                                    <option value="2">شركة فارمكس</option>
+                                    <option value="3">شركة سيديكو</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="saveMedicine()">حفظ الدواء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نموذج تسجيل التلفيات -->
+    <div class="modal fade" id="damageModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title"><i class="fas fa-times-circle me-2"></i> تسجيل تلفيات الأدوية</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="damageForm">
+                        <div class="mb-3">
+                            <label for="damageMedicine" class="form-label">اختر الدواء</label>
+                            <select class="form-select" id="damageMedicine" required>
+                                <option value="">اختر الدواء...</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="damageQuantity" class="form-label">الكمية التالفة</label>
+                            <input type="number" class="form-control" id="damageQuantity" min="1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="damageReason" class="form-label">سبب التلف</label>
+                            <select class="form-select" id="damageReason" required>
+                                <option value="">اختر السبب...</option>
+                                <option value="expiration">انتهاء الصلاحية</option>
+                                <option value="damage">تلف أثناء التخزين</option>
+                                <option value="transport">تلف أثناء النقل</option>
+                                <option value="other">أسباب أخرى</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="damageNotes" class="form-label">ملاحظات إضافية</label>
+                            <textarea class="form-control" id="damageNotes" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-danger" onclick="recordDamage()">تسجيل التلفيات</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نموذج إضافة مورد -->
+    <div class="modal fade" id="supplierModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title"><i class="fas fa-truck-loading me-2"></i> إضافة مورد جديد</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="supplierForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="supplierName" class="form-label">اسم المورد *</label>
+                                <input type="text" class="form-control" id="supplierName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="supplierContact" class="form-label">اسم المسؤول</label>
+                                <input type="text" class="form-control" id="supplierContact">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="supplierPhone" class="form-label">رقم الهاتف</label>
+                                <input type="tel" class="form-control" id="supplierPhone">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="supplierEmail" class="form-label">البريد الإلكتروني</label>
+                                <input type="email" class="form-control" id="supplierEmail">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="supplierAddress" class="form-label">العنوان</label>
+                            <textarea class="form-control" id="supplierAddress" rows="2"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="supplierPayment" class="form-label">شروط الدفع</label>
+                                <input type="text" class="form-control" id="supplierPayment" placeholder="30 يوم">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="supplierRating" class="form-label">التقييم</label>
+                                <select class="form-select" id="supplierRating">
+                                    <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                                    <option value="4">⭐⭐⭐⭐ (4)</option>
+                                    <option value="3">⭐⭐⭐ (3)</option>
+                                    <option value="2">⭐⭐ (2)</option>
+                                    <option value="1">⭐ (1)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-success" onclick="saveSupplier()">حفظ المورد</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نموذج إضافة موظف -->
+    <div class="modal fade" id="employeeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-secondary text-white">
+                    <h5 class="modal-title"><i class="fas fa-user-plus me-2"></i> إضافة موظف جديد</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="employeeForm">
+                        <div class="mb-3">
+                            <label for="employeeName" class="form-label">اسم الموظف الكامل *</label>
+                            <input type="text" class="form-control" id="employeeName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="employeeUsername" class="form-label">اسم المستخدم *</label>
+                            <input type="text" class="form-control" id="employeeUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="employeePassword" class="form-label">كلمة المرور *</label>
+                            <input type="password" class="form-control" id="employeePassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="employeeRole" class="form-label">الدور *</label>
+                            <select class="form-select" id="employeeRole" required>
+                                <option value="">اختر الدور...</option>
+                                <option value="admin">مدير النظام</option>
+                                <option value="pharmacist">صيدلي</option>
+                                <option value="assistant">مساعد صيدلي</option>
+                                <option value="delivery">موظف توصيل</option>
+                                <option value="cleaner">عامل نظافة</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="employeePermissions" class="form-label">الصلاحيات</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input permission-checkbox" type="checkbox" id="permRead"
+                                        value="read" checked>
+                                    <label class="form-check-label" for="permRead">قراءة</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input permission-checkbox" type="checkbox" id="permWrite"
+                                        value="write">
+                                    <label class="form-check-label" for="permWrite">كتابة</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input permission-checkbox" type="checkbox" id="permDelete"
+                                        value="delete">
+                                    <label class="form-check-label" for="permDelete">حذف</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input permission-checkbox" type="checkbox" id="permApprove"
+                                        value="approve">
+                                    <label class="form-check-label" for="permApprove">موافقة</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="saveEmployee()">حفظ الموظف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- ملفات JavaScript الخاصة بالمشروع -->
+    <script src="js/utils.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/medicines.js"></script>
+    <script src="js/sales.js"></script>
+    <script src="js/inventory.js"></script>
+    <script src="js/alerts.js"></script>
+    <script src="js/reports.js"></script>
+    <script src="js/suppliers.js"></script>
+    <script src="js/employees.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
