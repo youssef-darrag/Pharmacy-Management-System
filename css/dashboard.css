@@ -1,0 +1,54 @@
+/* تنسيقات خاصة بلوحة التحكم والصفحات المختلفة */
+.low-stock {
+    border-right: 4px solid #ff6b35;
+}
+
+.expiring-soon {
+    border-right: 4px solid #ffc107;
+}
+
+.supplier-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+.user-role-badge {
+    font-size: 0.75em;
+}
+
+.inventory-alert {
+    border-right: 4px solid;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.notification-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+.notification-item:hover {
+    background-color: #f8f9fa;
+}
+
+.notification-item.unread {
+    background-color: #f0f7ff;
+}
+
+.notification-item .notification-time {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
