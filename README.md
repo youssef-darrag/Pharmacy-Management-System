@@ -6,6 +6,8 @@
 
 A simple, interactive, and web-based **Pharmacy Management System** designed to streamline everyday tasks in a pharmacy. This project simulates core functionalities like managing medicine inventory and processing sales through a clean and responsive user interface.
 
+---
+
 ## 🚀 Features
 
 *   **Medicine Inventory Management:** View, add, update, or delete medicine stock.
@@ -14,11 +16,15 @@ A simple, interactive, and web-based **Pharmacy Management System** designed to 
 *   **User-Friendly Interface:** Clean and intuitive UI built with HTML and CSS for easy navigation.
 *   **Real-Time Updates:** Dynamic content updates using JavaScript without needing to reload the page.
 
+---
+
 ## 🛠️ Built With
 
 *   ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) - For structuring the web pages.
 *   ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) - For styling and responsive design.
 *   ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) - For client-side logic and dynamic functionality.
+
+---
 
 ## ⚙️ Installation & Setup
 
@@ -36,6 +42,8 @@ To get a local copy up and running, follow these simple steps:
     *   Simply open the `index.html` file in your preferred web browser.
     *   No additional server or dependencies are required!
 
+---
+
 ## 🎯 How to Use
 
 1.  Open `index.html` in your browser.
@@ -44,6 +52,8 @@ To get a local copy up and running, follow these simple steps:
 4.  In the **Sales** section, you can process transactions which will automatically adjust the inventory.
 5.  Use the search bar to filter the medicine list.
 
+---
+
 ## 🗺️ Future Roadmap
 
 - [ ] Integrate with a backend (e.g., Node.js, Firebase) for persistent data storage.
@@ -51,6 +61,8 @@ To get a local copy up and running, follow these simple steps:
 - [ ] Implement a database (like MongoDB or MySQL) for robust data management.
 - [ ] Generate sales reports and invoices.
 - [ ] Add barcode scanning functionality.
+
+---
 
 ## 🤝 Contributing
 
@@ -64,11 +76,15 @@ If you have a suggestion that would make this better, please fork the repo and c
 4.  Push to the Branch (`git push origin feature/AmazingFeature`)
 5.  Open a Pull Request
 
+---
+
 ## 📧 Contact
 
 Youssef Darrag - [Your GitHub Profile](https://github.com/youssef-darrag)
 
 Project Link: [https://github.com/youssef-darrag/Pharmacy-Management-System](https://github.com/youssef-darrag/Pharmacy-Management-System)
+
+---
 
 ## 📝 License
 
